@@ -57,3 +57,25 @@ messages = [
         "content": "You are a Python software developer expert. Give accurate, concise, and practical answers."
     }
 ]
+
+while True:
+    user_text = input("You: ")
+
+    if user_text.strip() == "":
+        continue  # ignore empty Enter presses
+
+    if user_text.lower() in ['quit', 'exit']:
+        print("Ending chat. Goodbye!")
+        break
+
+    add_user_message(messages, user_text)
+
+    try:
+        generated_text = chat(messages)
+        add_assistant_message(messages, generated_text)
+
+    except Exception as e:
+        print(f"\nError: {e}\n")
+        # Remove the failed message so the user can try again
+        if messages and messages[-1]['role'] == 'user':
+            messages.pop()
