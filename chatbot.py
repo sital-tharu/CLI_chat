@@ -41,3 +41,19 @@ def chat(messages):
 
     print("\n")
     return full_response
+
+# --- Main Chatbot Loop ---
+
+print("=" * 45)
+print("  Welcome to the Gemini Chatbot!")
+print("  Type 'quit' or 'exit' to stop.")
+print("=" * 45 + "\n")
+
+
+# System prompt = instructions for how the AI should behave
+messages = [
+    {
+        "role": "system",
+        "content": "You are a Python software developer expert. Give accurate, concise, and practical answers."
+    }
+]
