@@ -12,3 +12,32 @@ client = OpenAI(
     api_key=os.getenv("GOOGLE_API_KEY"),
 )
 
+
+
+# --- Helper Functions ---
+
+def add_user_message(messages, text):
+    messages.append({"role": "user", "content": text})
+
+def add_assistant_message(messages, text):
+    messages.append({"role": "assistant", "content": text})
+
+def chat(messages):
+    response = client.chat.completions.create(
+        model="gemini-2.5-flash-lite-preview-06-17",  # free model
+        messages=messages,
+        temperature=0.2,  # lower = more focused answers
+        stream=True,      # prints words as they arrive, feels faster
+    )
+
+    print("\nAI: ", end="", flush=True)
+    full_response = ""
+
+    for chunk in response:
+        content = chunk.choices[0].delta.content
+        if content is not None:
+            print(content, end="", flush=True)
+            full_response += content
+
+    print("\n")
+    return full_response
