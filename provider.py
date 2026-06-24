@@ -13,7 +13,7 @@ def call_api(prompt, options, context):
     messages = [
         {
             "role": "system",
-            "content": "You are a Python software developer expert. Give accurate, concise, and practical answers."
+            "content": "You are a Python software developer expert. Give accurate, concise, and practical answers. If asked about anything unrelated to Python or programming, politely decline and redirect the user to Python topics."
         },
         {"role": "user", "content": prompt}
     ]
