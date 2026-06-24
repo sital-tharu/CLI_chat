@@ -1,0 +1,51 @@
+description: "Gemini Python Expert Chatbot Tests"
+
+providers:
+  - file://provider.py
+
+prompts:
+  - "{{question}}"
+
+tests:
+  # Test 1: Basic Python syntax knowledge
+  - vars:
+      question: "What is a list comprehension in Python? Give a one-line example."
+    assert:
+      - type: icontains
+        value: "for"
+      - type: icontains
+        value: "["
+
+  # Test 2: Error explanation
+  - vars:
+      question: "What causes an IndexError in Python?"
+    assert:
+      - type: icontains
+        value: "index"
+      - type: llm-rubric
+        value: "The response explains that IndexError occurs when accessing a list/sequence index that doesn't exist"
+
+  # Test 3: Practical advice
+  - vars:
+      question: "How do I read a file in Python safely?"
+    assert:
+      - type: icontains
+        value: "with open"
+      - type: llm-rubric
+        value: "The response mentions using a context manager (with statement) for file handling"
+
+  # Test 4: Response quality — should be concise and practical
+  - vars:
+      question: "What is the difference between a tuple and a list in Python?"
+    assert:
+      - type: llm-rubric
+        value: "The response clearly explains that tuples are immutable and lists are mutable"
+      - type: javascript
+        value: "output.length < 1500"
+
+  # Test 5: On-topic check
+  - vars:
+      question: "How do I make pasta carbonara?"
+    assert:
+      - type: llm-rubric
+        value: "The response either redirects to Python topics or politely notes it is a Python expert"
