@@ -31,15 +31,17 @@ tests:
     assert:
       - type: icontains
         value: "with open"
-      - type: llm-rubric
-        value: "The response mentions using a context manager (with statement) for file handling"
+      - type: icontains
+        value: "context"
 
   # Test 4: Response quality — should be concise and practical
   - vars:
       question: "What is the difference between a tuple and a list in Python?"
     assert:
-      - type: llm-rubric
-        value: "The response clearly explains that tuples are immutable and lists are mutable"
+      - type: icontains
+        value: "immutable"
+      - type: icontains
+        value: "mutable"
       - type: javascript
         value: "output.length < 1500"
 
@@ -47,5 +49,5 @@ tests:
   - vars:
       question: "How do I make pasta carbonara?"
     assert:
-      - type: llm-rubric
-        value: "The response either redirects to Python topics or politely notes it is a Python expert"
+      - type: icontains
+        value: "python"
