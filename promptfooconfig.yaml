@@ -22,8 +22,10 @@ tests:
     assert:
       - type: icontains
         value: "index"
-      - type: llm-rubric
-        value: "The response explains that IndexError occurs when accessing a list/sequence index that doesn't exist"
+      - type: icontains
+        value: "out of range"
+      - type: icontains
+        value: "list"
 
   # Test 3: Practical advice
   - vars:
