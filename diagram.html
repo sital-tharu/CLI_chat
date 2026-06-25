@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Promptfoo Workflow</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0f0f1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .card {
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+      border-radius: 20px;
+      padding: 48px 56px;
+      width: 780px;
+    }
+
+    .title {
+      text-align: center;
+      color: #a0a0c0;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    .flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      width: 160px;
+    }
+
+    .icon-box {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+    }
+
+    .node-1 .icon-box { background: linear-gradient(135deg, #1e3a5f, #2563eb); }
+    .node-2 .icon-box { background: linear-gradient(135deg, #3b1f5e, #7c3aed); }
+    .node-3 .icon-box { background: linear-gradient(135deg, #1a4731, #059669); }
+
+    .node-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: #e2e2f0;
+      text-align: center;
+    }
+
+    .node-sub {
+      font-size: 11px;
+      color: #6060a0;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 0 8px;
+      margin-bottom: 40px;
+    }
+
+    .arrow-line {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(to right, #3b3b6b, #6060a0);
+      position: relative;
+    }
+
+    .arrow-line::after {
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: -4px;
+      border-left: 8px solid #6060a0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+    }
+
+    .arrow-tag {
+      font-size: 10px;
+      color: #5050a0;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #2a2a4a;
+      margin: 36px 0 24px;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .step {
+      flex: 1;
+      background: #12122a;
+      border: 1px solid #2a2a4a;
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .step-num {
+      font-size: 10px;
+      color: #5050a0;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+
+    .step-text {
+      font-size: 12px;
+      color: #9090c0;
+      line-height: 1.5;
+    }
+
+    .step-text strong {
+      color: #c0c0e0;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #1e1e3a;
+      border: 1px solid #3a3a6a;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 10px;
+      color: #7070c0;
+      font-family: monospace;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="title">LLM Evaluation Workflow</div>
+
+    <div class="flow">
+      <!-- Node 1 -->
+      <div class="node node-1">
+        <div class="icon-box">🤖</div>
+        <div class="node-label">Python Chatbot</div>
+        <div class="node-sub">Gemini API<br/>via OpenAI SDK</div>
+      </div>
+
+      <!-- Arrow 1 -->
+      <div class="arrow">
+        <div class="arrow-line"></div>
+        <div class="arrow-tag">provider.py</div>
+      </div>
+
+      <!-- Node 2 -->
+      <div class="node node-2">
+        <div class="icon-box">⚡</div>
+        <div class="node-label">promptfoo</div>
+        <div class="node-sub">Runs 5 test cases<br/>with assertions</div>
+      </div>
+
+      <!-- Arrow 2 -->
+      <div class="arrow">
+        <div class="arrow-line"></div>
+        <div class="arrow-tag">promptfoo share</div>
+      </div>
+
+      <!-- Node 3 -->
+      <div class="node node-3">
+        <div class="icon-box">📊</div>
+        <div class="node-label">Eval Results</div>
+        <div class="node-sub">Pass / Fail<br/>dashboard</div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">STEP 01</div>
+        <div class="step-text">
+          <strong>Ask a question</strong>
+          User sends a Python question to the chatbot
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">STEP 02</div>
+        <div class="step-text">
+          <strong>Assert the answer</strong>
+          promptfoo checks keywords, length &amp; AI judge
+          <span class="badge">icontains</span>
+          <span class="badge">llm-rubric</span>
+          <span class="badge">javascript</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">STEP 03</div>
+        <div class="step-text">
+          <strong>View &amp; share</strong>
+          Results uploaded to promptfoo.app cloud dashboard
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
