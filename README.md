@@ -96,4 +96,39 @@ Ending chat. Goodbye!
 
 ---
 
+## Testing with Promptfoo
+
+This project includes an automated evaluation suite using [Promptfoo](https://promptfoo.dev/) to verify that the chatbot responds correctly and stays on-topic.
+
+### Setup
+
+Install Promptfoo globally:
+```bash
+npm install -g promptfoo
+```
+
+### Configuration: `promptfooconfig.yaml`
+
+The config defines 5 test cases against a custom Python provider (`provider.py`):
+
+| # | Question | Assertions |
+|---|----------|------------|
+| 1 | List comprehension syntax | Response contains `for` and `[` |
+| 2 | `IndexError` explanation | Response mentions `index`, `out of range`, and `list` |
+| 3 | Safe file reading | Response contains `with open` and `context` |
+| 4 | Tuple vs list difference | Contains `immutable`/`mutable`; response under 1500 chars |
+| 5 | Off-topic question (pasta recipe) | Response redirects and mentions `python` |
+
+### Running the Tests
+
+```bash
+promptfoo eval
+```
+
+To view results in a browser:
+```bash
+promptfoo view
+```
+
+---
 
