@@ -37,3 +37,14 @@ def respond(message, history):
         if content is not None:
             partial += content
             yield partial
+
+
+demo = gr.ChatInterface(
+    fn=respond,
+    type="messages",
+    title="Python Dev Chatbot",
+    description="Ask me anything about Python and programming. Powered by Google Gemini.",
+)
+
+if __name__ == "__main__":
+    demo.launch()
