@@ -41,7 +41,6 @@ def respond(message, history):
 
 demo = gr.ChatInterface(
     fn=respond,
-    type="messages",
     title="Python Dev Chatbot",
     description="Ask me anything about Python and programming. Powered by Google Gemini.",
 )
